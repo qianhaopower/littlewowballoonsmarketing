@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        # Write server env vars into a file Next.js will load
+        - echo "RESEND_API_KEY=$RESEND_API_KEY" >> .env.production
+        - echo "QUOTE_FROM_EMAIL=$QUOTE_FROM_EMAIL" >> .env.production
+        - echo "QUOTE_TO_EMAIL=$QUOTE_TO_EMAIL" >> .env.production
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
