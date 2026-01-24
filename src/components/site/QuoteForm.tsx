@@ -23,53 +23,52 @@ export function QuoteForm() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-  const payload = {
-  name: String(formData.get("name") || "").trim(),
-  email: String(formData.get("email") || "").trim(),
-  mobile: String(formData.get("mobile") || "").trim(),
-  eventDate: String(formData.get("eventDate") || "").trim(),
-  suburb: String(formData.get("suburb") || "").trim(),
-  eventType: String(formData.get("eventType") || "").trim(),
-  message: String(formData.get("message") || "").trim(),
-};
-// Front-end email validation
-if (!isValidEmail(payload.email)) {
-  setEmailError("Please enter a valid email address.");
-  setLoading(false);
-  return;
-}
+    const payload = {
+      name: String(formData.get("name") || "").trim(),
+      email: String(formData.get("email") || "").trim(),
+      mobile: String(formData.get("mobile") || "").trim(),
+      eventDate: String(formData.get("eventDate") || "").trim(),
+      suburb: String(formData.get("suburb") || "").trim(),
+      eventType: String(formData.get("eventType") || "").trim(),
+      message: String(formData.get("message") || "").trim(),
+    };
 
-try {
-  const res = await fetch("/api/quote", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+    // Front-end email validation
+    if (!isValidEmail(payload.email)) {
+      setEmailError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
 
-  let data: any = {};
-  try {
-    data = await res.json();
-  } catch {
-    // ignore JSON parse error
-  }
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-  if (!res.ok || data?.ok !== true) {
-    throw new Error(data?.error || "Failed to send.");
-  }
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        // ignore JSON parse error
+      }
 
-  // Success
-  setStatus("success");
-  setEmailError("");
-  setErrorMsg("");
-  form.reset();
-} catch (err: any) {
-  setStatus("error");
-  setErrorMsg(err?.message || "Something went wrong.");
-} finally {
-  setLoading(false);
-  return;
-}
+      if (!res.ok || data?.ok !== true) {
+        throw new Error(data?.error || "Failed to send.");
+      }
 
+      // Success
+      setStatus("success");
+      setEmailError("");
+      setErrorMsg("");
+      form.reset();
+    } catch (err: any) {
+      setStatus("error");
+      setErrorMsg(err?.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   const inputBase =
@@ -111,21 +110,21 @@ try {
         )}
 
         <div className="grid gap-3 sm:grid-cols-2">
-              <div className="relative">
-    <label
-      htmlFor="eventDate"
-      className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
-    >
-      Event date
-    </label>
+          <div className="relative">
+            <label
+              htmlFor="eventDate"
+              className="absolute -top-2 left-3 bg-white px-1 text-xs text-gray-600"
+            >
+              Event date
+            </label>
 
-    <input
-      id="eventDate"
-      type="date"
-      name="eventDate"
-      className={inputBase}
-    />
-  </div>
+            <input
+              id="eventDate"
+              type="date"
+              name="eventDate"
+              className={inputBase}
+            />
+          </div>
           <input
             name="suburb"
             className={inputBase}
@@ -159,14 +158,15 @@ try {
             </label>
           </div>
         </div>
-<input
-  type="tel"
-  name="mobile"
-  className={inputBase}
-  placeholder="Mobile number (e.g. 0412 345 678)"
-  inputMode="tel"
-  pattern="^0[0-9]{9}$"
-/>
+
+        <input
+          type="tel"
+          name="mobile"
+          className={inputBase}
+          placeholder="Mobile number (e.g. 0412 345 678)"
+          inputMode="tel"
+          pattern="^0[0-9]{9}$"
+        />
         <textarea
           name="message"
           className={"min-h-[110px] " + inputBase}
