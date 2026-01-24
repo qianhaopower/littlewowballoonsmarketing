@@ -1,5 +1,3 @@
-
-
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -60,39 +58,39 @@ export async function POST(req: Request) {
       <p>Submitted from the Little Wow Balloons quote form.</p>
     `;
 
- // 2) Email to CUSTOMER (confirmation)
-const customerSubject = `🎈 We’ve received your request — Little Wow Balloons`;
+    // 2) Email to CUSTOMER (confirmation)
+    const customerSubject = `🎈 We've received your request — Little Wow Balloons`;
 
-const customerHtml = `
-  <p>Hi ${escapeHtml(name)},</p>
+    const customerHtml = `
+      <p>Hi ${escapeHtml(name)},</p>
 
-  <p>
-    Thanks for getting in touch with <strong>Little Wow Balloons</strong>! 🎈<br/>
-    We’ve received your request and will get back to you within
-    <strong>24 hours</strong> with pricing and availability.
-  </p>
+      <p>
+        Thanks for getting in touch with <strong>Little Wow Balloons</strong>! 🎈<br/>
+        We've received your request and will get back to you within
+        <strong>24 hours</strong> with pricing and availability.
+      </p>
 
-  <h3>Your request summary</h3>
-  <ul>
-    <li><strong>Event type:</strong> ${escapeHtml(eventType || "-")}</li>
-    <li><strong>Event date:</strong> ${escapeHtml(eventDate || "-")}</li>
-    <li><strong>Suburb / Postcode:</strong> ${escapeHtml(suburb || "-")}</li>
-  </ul>
+      <h3>Your request summary</h3>
+      <ul>
+        <li><strong>Event type:</strong> ${escapeHtml(eventType || "-")}</li>
+        <li><strong>Event date:</strong> ${escapeHtml(eventDate || "-")}</li>
+        <li><strong>Suburb / Postcode:</strong> ${escapeHtml(suburb || "-")}</li>
+      </ul>
 
-  <p>
-    If you need to make any changes, just reply to this email —
-    it comes straight to me.
-  </p>
+      <p>
+        If you need to make any changes, just reply to this email —
+        it comes straight to me.
+      </p>
 
-  <p>
-    Looking forward to helping make your event extra special!
-  </p>
+      <p>
+        Looking forward to helping make your event extra special!
+      </p>
 
-  <p>
-    Warm regards,<br/>
-    <strong>Hao Qian</strong><br/>
-    Little Wow Balloons 🎈
-  </p>
+      <p>
+        Warm regards,<br/>
+        <strong>Hao Qian</strong><br/>
+        Little Wow Balloons 🎈
+      </p>
 `;
 
     // Send both (sequential for simplicity)
