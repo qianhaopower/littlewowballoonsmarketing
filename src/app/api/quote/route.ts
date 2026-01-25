@@ -83,7 +83,7 @@ export async function POST(req: Request) {
         <p><b>Event date:</b> ${eventDate ?? "-"}</p>
         <p><b>Suburb:</b> ${suburb ?? "-"}</p>
 
-        <p>If anything changes, just reply to this email.</p>
+ 
         <p>— Little Wow Balloons</p>
       `,
     });

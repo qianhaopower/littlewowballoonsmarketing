@@ -2,6 +2,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import Image from "next/image";
 import { QuoteForm } from "@/components/site/QuoteForm";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { TopContactBar } from "@/components/TopContactBar";
 
 
 const services = [
@@ -28,10 +30,7 @@ const services = [
 ];
 
 const faqs = [
-  {
-    q: "Are you fully insured?",
-    a: "Yes — we carry public liability insurance suitable for events and venues.",
-  },
+
   {
     q: "Are the balloons safe for indoor events?",
     a: "Yes. Our balloons are air-filled (non-flammable) and suitable for indoor/outdoor events.",
@@ -47,6 +46,10 @@ const faqs = [
   {
     q: "What ages is this suitable for?",
     a: "All ages — kids love it, adults enjoy it, and it works wonderfully for community and aged care events.",
+  },
+    {
+    q: "Are you fully insured?",
+    a: "Yes — we carry public liability insurance suitable for events and venues.",
   },
 ];
 
@@ -73,7 +76,7 @@ export default function Home() {
       {/* LEFT */}
       <div>
         <div className="inline-flex items-center gap-2 rounded-full bg-white/85 px-4 py-2 text-sm font-semibold text-slate-800 ring-1 ring-slate-200">
-          🎈 Fully insured • Air-filled balloons • Melbourne • Wholesale available
+          🎈 Melbourne-based • Delivered to your door • Live balloon-making
         </div>
 
         <h1 className="mt-6 max-w-xl text-4xl font-extrabold tracking-tight text-slate-900 leading-[1.15] md:max-w-2xl md:text-5xl">
@@ -286,6 +289,8 @@ to bulk orders for corporate events and kids parties.
           </div>
         </section>
 
+              <TestimonialsSection />
+
         {/* HOW IT WORKS */}
         <section className="mx-auto max-w-6xl px-4 pb-14">
           <div className="rounded-3xl bg-white p-8 shadow-soft ring-1 ring-slate-200">
@@ -358,14 +363,35 @@ to bulk orders for corporate events and kids parties.
                 <div className="mt-5 rounded-2xl bg-white/80 p-4 ring-1 ring-slate-200">
                   {/* <div className="text-sm font-semibold text-slate-800">Quick notes</div> */}
                   <ul className="mt-2 list-disc pl-5 text-sm text-slate-600">
-                    <li>Fully insured</li>
-                    <li>Air-filled balloons (non-flammable)</li>
-                    <li>Great for kids, adults, and seniors</li>
+<li>
+  📞{" "}
+  <a
+    href="tel:0425901004"
+    className="font-semibold text-slate-900 hover:underline"
+  >
+    0425 901 004
+  </a>
+</li>
+
+<li>
+  ✉️{" "}
+  <a
+    href="mailto:qianhaopower@gmail.com"
+    className="hover:underline"
+  >
+    qianhaopower@gmail.com
+  </a>
+</li>
+
+<li>
+  📍 Melbourne (East & South-East) · Reply within 24 hours
+</li>
                   </ul>
                 </div>
               </div>
 
        <QuoteForm />
+    
             </div>
           </div>
         </section>

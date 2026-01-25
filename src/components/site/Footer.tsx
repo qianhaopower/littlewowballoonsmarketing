@@ -16,7 +16,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-6 text-xs text-slate-500">
-          © {new Date().getFullYear()} Little Wow Balloons. Fully insured.
+          © {new Date().getFullYear()} Little Wow Balloons. 
         </div>
       </div>
     </footer>
