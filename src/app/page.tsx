@@ -91,7 +91,7 @@ export default function Home() {
     <div className="grid items-center gap-12 md:grid-cols-2">
       {/* LEFT */}
       <div>
-        <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-orange/15 to-brand-pink/15 px-5 py-3 text-sm font-bold text-brand-orange ring-1 ring-brand-orange/20 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-orange/25 to-brand-pink/25 px-5 py-3 text-sm font-bold text-brand-orange ring-1 ring-brand-orange/40 backdrop-blur-sm">
           <span>🎈</span> Melbourne's Balloon Experts
         </div>
 
@@ -109,7 +109,7 @@ export default function Home() {
             Get a Quote
             <span>→</span>
           </a>
-          <a href="#services" className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/30 bg-white px-8 py-4 font-semibold text-brand-blue transition hover:border-brand-blue/60 hover:bg-brand-blue/5">
+          <a href="#services" className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/50 bg-white px-8 py-4 font-semibold text-brand-blue transition hover:border-brand-blue/80 hover:bg-brand-blue/5">
             Explore Services
           </a>
         </div>
