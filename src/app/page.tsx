@@ -3,6 +3,8 @@ import { Footer } from "@/components/site/Footer";
 import Image from "next/image";
 import { QuoteForm } from "@/components/site/QuoteForm";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import fs from "fs";
+import path from "path";
 
 
 
@@ -52,6 +54,27 @@ const faqs = [
     a: "Yes — we carry public liability insurance suitable for events and venues.",
   },
 ];
+
+// Read images from public/gallery (server-side). This lets you add/remove
+// images in the `public/gallery` folder without editing this file.
+const galleryDir = path.join(process.cwd(), "public", "gallery");
+let galleryImages: string[] = [];
+try {
+  galleryImages = fs
+    .readdirSync(galleryDir)
+    .filter((f) => /\.(png|jpe?g|webp)$/i.test(f))
+    .sort()
+    .map((f) => `/gallery/${f}`);
+} catch (e) {
+  galleryImages = [
+    "/gallery/gallery-01.png",
+    "/gallery/gallery-02.png",
+    "/gallery/gallery-03.png",
+    "/gallery/gallery-04.png",
+    "/gallery/gallery-05.png",
+    "/gallery/gallery-06.png",
+  ];
+}
 
 export default function Home() {
   return (
@@ -264,14 +287,7 @@ to bulk orders for corporate events and kids parties.
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-  "/gallery/gallery-01.png",
-  "/gallery/gallery-02.png",
-  "/gallery/gallery-03.png",
-  "/gallery/gallery-04.png",
-  "/gallery/gallery-05.png",
-  "/gallery/gallery-06.png",
-].map((src, i) => (
+            {galleryImages.map((src, i) => (
   <div
     key={src}
     className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-slate-200"
