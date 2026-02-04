@@ -12,8 +12,24 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const touchStartTime = useRef(0);
+  const touchStartY = useRef(0);
+  const touchCurrentX = useRef(0);
+  const touchCurrentY = useRef(0);
+  const isSwiping = useRef(false);
+
+  const goToPrevious = useCallback(() => {
+    if (selectedIndex === null || isTransitioning) return;
+    setIsTransitioning(true);
+    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev! - 1));
+    setTimeout(() => setIsTransitioning(false), 260);
+  }, [selectedIndex, isTransitioning, images.length]);
+
+  const goToNext = useCallback(() => {
+    if (selectedIndex === null || isTransitioning) return;
+    setIsTransitioning(true);
+    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev! + 1));
+    setTimeout(() => setIsTransitioning(false), 260);
+  }, [selectedIndex, isTransitioning, images.length]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (!isOpen) return;
@@ -26,49 +42,17 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
     } else if (e.key === 'ArrowRight' && selectedIndex !== null) {
       goToNext();
     }
-  }, [isOpen, selectedIndex]);
-
-  const handleTouchStart = useCallback((e: TouchEvent) => {
-    touchStartX.current = e.changedTouches[0].screenX;
-    touchStartTime.current = Date.now();
-  }, []);
-
-  const handleSwipe = useCallback((endX: number) => {
-    const swipeDistance = touchStartX.current - endX;
-    const swipeTime = Date.now() - touchStartTime.current;
-    const minSwipeDistance = 30;
-    const maxSwipeTime = 1000; // 1 second
-
-    if (selectedIndex === null || swipeTime > maxSwipeTime) return;
-
-    // Swipe left - go to next image
-    if (swipeDistance > minSwipeDistance) {
-      goToNext();
-    }
-    // Swipe right - go to previous image
-    else if (swipeDistance < -minSwipeDistance) {
-      goToPrevious();
-    }
-  }, [selectedIndex]);
-
-  const handleTouchEnd = useCallback((e: TouchEvent) => {
-    touchEndX.current = e.changedTouches[0].screenX;
-    handleSwipe(touchEndX.current);
-  }, [handleSwipe]);
+  }, [isOpen, selectedIndex, goToPrevious, goToNext]);
 
   useEffect(() => {
     if (!isOpen) return;
 
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('touchstart', handleTouchStart, false);
-    window.addEventListener('touchend', handleTouchEnd, false);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isOpen, handleKeyDown, handleTouchStart, handleTouchEnd]);
+  }, [isOpen, handleKeyDown]);
 
   const openLightbox = (index: number) => {
     setSelectedIndex(index);
@@ -76,23 +60,51 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
   };
 
   const closeLightbox = () => {
+    if (isSwiping.current) {
+      isSwiping.current = false;
+      return;
+    }
     setIsOpen(false);
     setTimeout(() => setSelectedIndex(null), 300);
   };
 
-  const goToPrevious = useCallback(() => {
-    if (selectedIndex === null || isTransitioning) return;
-    setIsTransitioning(true);
-    setSelectedIndex((prev) => (prev === 0 ? images.length - 1 : prev! - 1));
-    setTimeout(() => setIsTransitioning(false), 300);
-  }, [selectedIndex, isTransitioning, images.length]);
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    const t = e.changedTouches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+    touchCurrentX.current = t.clientX;
+    touchCurrentY.current = t.clientY;
+    isSwiping.current = false;
+  }, []);
 
-  const goToNext = useCallback(() => {
-    if (selectedIndex === null || isTransitioning) return;
-    setIsTransitioning(true);
-    setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev! + 1));
-    setTimeout(() => setIsTransitioning(false), 300);
-  }, [selectedIndex, isTransitioning, images.length]);
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    const t = e.changedTouches[0];
+    touchCurrentX.current = t.clientX;
+    touchCurrentY.current = t.clientY;
+    const dx = touchCurrentX.current - touchStartX.current;
+    const dy = touchCurrentY.current - touchStartY.current;
+    if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+      isSwiping.current = true;
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const dx = touchCurrentX.current - touchStartX.current;
+    const dy = touchCurrentY.current - touchStartY.current;
+    const minSwipeDistance = 40;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipeDistance) {
+      if (dx < 0) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+
+    setTimeout(() => {
+      isSwiping.current = false;
+    }, 0);
+  }, [goToNext, goToPrevious]);
 
   return (
     <>
@@ -124,6 +136,9 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
         <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 animate-fadeIn"
           onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <style>{`
             @keyframes fadeIn {
@@ -169,7 +184,7 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
                 goToPrevious();
               }}
               disabled={isTransitioning}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 md:left-0 md:-translate-x-12 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 transition text-white disabled:opacity-50 z-10"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 md:left-0 md:-translate-x-12 p-2 sm:p-3 rounded-full bg-white/85 text-slate-900 ring-1 ring-white/70 shadow-lg hover:bg-white active:bg-white transition disabled:opacity-60 z-10"
               aria-label="Previous image"
             >
               <ChevronLeft size={28} className="sm:w-8 sm:h-8" />
@@ -182,7 +197,7 @@ export function GalleryLightbox({ images }: GalleryLightboxProps) {
                 goToNext();
               }}
               disabled={isTransitioning}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 md:right-0 md:translate-x-12 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 transition text-white disabled:opacity-50 z-10"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 md:right-0 md:translate-x-12 p-2 sm:p-3 rounded-full bg-white/85 text-slate-900 ring-1 ring-white/70 shadow-lg hover:bg-white active:bg-white transition disabled:opacity-60 z-10"
               aria-label="Next image"
             >
               <ChevronRight size={28} className="sm:w-8 sm:h-8" />
