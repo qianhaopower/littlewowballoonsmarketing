@@ -221,18 +221,15 @@ export default function Home() {
   <div
     key={p.title}
     className={[
-      "rounded-2xl p-6 sm:p-8 ring-1 transition relative overflow-hidden",
-      p.highlight
-        ? "bg-gradient-to-br from-brand-orange to-brand-pink text-white ring-0 shadow-2xl shadow-brand-orange/30 md:scale-105 lg:scale-110"
-        : "bg-white ring-slate-200 shadow-lg hover:shadow-xl hover:ring-slate-300",
+      "rounded-2xl p-6 sm:p-8 ring-1 transition relative overflow-hidden bg-white ring-slate-200 shadow-lg hover:shadow-xl hover:ring-slate-300",
+      p.highlight ? "ring-2 ring-brand-orange/40" : "",
     ].join(" ")}
   >
-    {p.highlight && <div className="pointer-events-none absolute top-0 right-0 h-32 w-32 bg-white/10 rounded-full blur-2xl" />}
     <div className="relative z-10">
-      <div className={p.highlight ? "text-white/90 font-semibold text-xs sm:text-sm" : "text-slate-700 font-semibold text-xs sm:text-sm"}>{p.count}</div>
-      <div className={`mt-2 text-3xl sm:text-4xl font-black ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.price}</div>
-      <div className={`mt-1 text-base sm:text-lg font-bold ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.title}</div>
-      <div className={`mt-3 text-xs sm:text-sm leading-relaxed ${p.highlight ? "text-white/90" : "text-slate-700"}`}>{p.note}</div>
+      <div className="text-slate-700 font-semibold text-xs sm:text-sm">{p.count}</div>
+      <div className="mt-2 text-3xl sm:text-4xl font-black text-slate-900">{p.price}</div>
+      <div className="mt-1 text-base sm:text-lg font-bold text-slate-900">{p.title}</div>
+      <div className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-700">{p.note}</div>
     </div>
   </div>
 ))}
