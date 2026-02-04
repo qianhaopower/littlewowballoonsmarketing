@@ -53,7 +53,7 @@ export function Header() {
             {/* CTA */}
         <a
   href="#quote"
-  className="inline-flex items-center rounded-full bg-yellow-400 px-5 py-2.5 text-sm font-extrabold text-slate-900 shadow-lg transition hover:bg-yellow-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/60"
+  className="inline-flex items-center rounded-full bg-yellow-400 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-extrabold text-slate-900 shadow-lg transition hover:bg-yellow-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/60"
 >
   Get a quote
 </a>

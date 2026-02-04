@@ -95,12 +95,12 @@ export default function Home() {
           <span>🎈</span> Melbourne's Balloon Experts
         </div>
 
-        <h1 className="mt-8 max-w-2xl text-5xl font-black tracking-tighter text-slate-900 leading-[1.1] md:text-6xl">
+        <h1 className="mt-8 max-w-2xl text-4xl font-black tracking-tighter text-slate-900 leading-[1.1] sm:text-5xl md:text-6xl">
           Unforgettable Balloons 
           <span className="bg-gradient-to-r from-brand-orange via-brand-pink to-brand-yellow bg-clip-text text-transparent">Magic</span>
         </h1>
 
-        <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
+        <p className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-slate-700">
           30+ custom balloon designs, live entertainment, and bulk orders for kids' parties, corporate events, festivals, schools, and beyond.
         </p>
 
@@ -158,13 +158,13 @@ export default function Home() {
 
 
         {/* SERVICES */}
-        <section id="services" className="scroll-mt-28 mx-auto max-w-6xl px-4 py-20">
-          <div className="mb-16 text-center">
-            <h2 className="text-5xl font-black text-slate-900">Perfect for Every Event</h2>
-            <p className="mt-4 text-xl text-slate-600">Live balloon-making entertainment starting at $180/hour</p>
+        <section id="services" className="scroll-mt-28 mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Perfect for Every Event</h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Live balloon-making entertainment starting at $180/hour</p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {services.map((s, idx) => (
               <a
                 key={s.title}
@@ -193,13 +193,13 @@ export default function Home() {
         </section>
 
         {/* BUNDLES / PRICING ANCHORS */}
-        <section id="bundles" className="scroll-mt-28 mx-auto max-w-6xl px-4 py-20 bg-gradient-to-b from-slate-50 to-white">
-          <div className="mb-16 text-center">
-            <h2 className="text-5xl font-black text-slate-900">Delivery Bundles</h2>
-            <p className="mt-4 text-xl text-slate-600">Ready-made balloon packages delivered to your door</p>
+        <section id="bundles" className="scroll-mt-28 mx-auto max-w-6xl px-4 py-16 sm:py-20 bg-gradient-to-b from-slate-50 to-white">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Delivery Bundles</h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Ready-made balloon packages delivered to your door</p>
           </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
               {[
   {
     title: "Party Starter",
@@ -230,18 +230,18 @@ export default function Home() {
   <div
     key={p.title}
     className={[
-      "rounded-2xl p-8 ring-1 transition relative overflow-hidden",
+      "rounded-2xl p-6 sm:p-8 ring-1 transition relative overflow-hidden",
       p.highlight
-        ? "bg-gradient-to-br from-brand-orange to-brand-pink text-white ring-0 shadow-2xl shadow-brand-orange/30 scale-105 md:scale-110"
+        ? "bg-gradient-to-br from-brand-orange to-brand-pink text-white ring-0 shadow-2xl shadow-brand-orange/30 md:scale-105 lg:scale-110"
         : "bg-white ring-slate-200 shadow-lg hover:shadow-xl hover:ring-slate-300",
     ].join(" ")}
   >
     {p.highlight && <div className="pointer-events-none absolute top-0 right-0 h-32 w-32 bg-white/10 rounded-full blur-2xl" />}
     <div className="relative z-10">
-      <div className={p.highlight ? "text-white/90 font-semibold" : "text-slate-600 font-semibold"}>{p.count}</div>
-      <div className={`mt-2 text-4xl font-black ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.price}</div>
-      <div className="mt-1 text-lg font-bold">{p.title}</div>
-      <div className={`mt-3 text-sm leading-relaxed ${p.highlight ? "text-white/80" : "text-slate-600"}`}>{p.note}</div>
+      <div className={p.highlight ? "text-white/90 font-semibold text-xs sm:text-sm" : "text-slate-600 font-semibold text-xs sm:text-sm"}>{p.count}</div>
+      <div className={`mt-2 text-3xl sm:text-4xl font-black ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.price}</div>
+      <div className="mt-1 text-base sm:text-lg font-bold">{p.title}</div>
+      <div className={`mt-3 text-xs sm:text-sm leading-relaxed ${p.highlight ? "text-white/80" : "text-slate-600"}`}>{p.note}</div>
     </div>
   </div>
 ))}
@@ -250,22 +250,22 @@ export default function Home() {
         </section>
 
         {/* GALLERY PREVIEW */}
-        <section id="gallery" className="scroll-mt-40 mx-auto max-w-6xl px-4 py-20">
-          <div className="mb-16 text-center">
-            <h2 className="text-5xl font-black text-slate-900">Our Creations</h2>
-            <p className="mt-4 text-xl text-slate-600">Explore 14+ stunning balloon designs in action</p>
+        <section id="gallery" className="scroll-mt-40 mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Our Creations</h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Explore 14+ stunning balloon designs in action</p>
           </div>
 
           <GalleryLightbox images={galleryImages} />
         </section>
 
         {/* HOW IT WORKS */}
-        <section className="mx-auto max-w-6xl px-4 py-20">
-          <div className="mb-16 text-center">
-            <h2 className="text-5xl font-black text-slate-900">Our Process</h2>
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Our Process</h2>
           </div>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-6 sm:gap-8 md:grid-cols-3">
              {[
   {
     title: "1. Choose Your Option",
@@ -304,43 +304,43 @@ export default function Home() {
         <TestimonialsSection />
 
         {/* FAQ */}
-        <section id="faq" className="scroll-mt-40 mx-auto max-w-6xl px-4 py-20 bg-gradient-to-b from-slate-50 to-white">
-          <div className="mb-16 text-center">
-            <h2 className="text-5xl font-black text-slate-900">Questions?</h2>
-            <p className="mt-4 text-xl text-slate-600">Everything you need to know</p>
+        <section id="faq" className="scroll-mt-40 mx-auto max-w-6xl px-4 py-16 sm:py-20 bg-gradient-to-b from-slate-50 to-white">
+          <div className="mb-12 sm:mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Questions?</h2>
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Everything you need to know</p>
           </div>
-          <div className="mx-auto max-w-3xl space-y-4">
+          <div className="mx-auto max-w-3xl space-y-3 sm:space-y-4">
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-xl bg-white p-6 shadow-lg ring-1 ring-slate-200 transition hover:ring-brand-orange/30 hover:shadow-lg cursor-pointer"
+                className="group rounded-xl bg-white p-4 sm:p-6 shadow-lg ring-1 ring-slate-200 transition hover:ring-brand-orange/30 hover:shadow-lg cursor-pointer"
               >
-                <summary className="flex items-center justify-between font-semibold text-slate-900 text-lg">
+                <summary className="flex items-center justify-between font-semibold text-slate-900 text-base sm:text-lg">
                   {f.q}
-                  <span className="text-xl text-brand-orange transition group-open:rotate-180">▼</span>
+                  <span className="text-lg sm:text-xl text-brand-orange transition group-open:rotate-180">▼</span>
                 </summary>
-                <div className="mt-4 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">{f.a}</div>
+                <div className="mt-3 sm:mt-4 text-slate-700 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-3 sm:pt-4">{f.a}</div>
               </details>
             ))}
           </div>
         </section>
 
         {/* CTA + Quote */}
-        <section id="quote" className="scroll-mt-28 mx-auto max-w-6xl px-4 pb-20">
+        <section id="quote" className="scroll-mt-28 mx-auto max-w-6xl px-4 pb-16 sm:pb-20">
           <div className="rounded-3xl bg-gradient-to-br from-brand-orange via-brand-pink to-brand-blue p-1 shadow-2xl">
-            <div className="rounded-[26px] bg-white p-8 md:p-12">
-            <div className="grid gap-8 md:grid-cols-2 md:items-start">
+            <div className="rounded-[26px] bg-white p-6 sm:p-8 md:p-12">
+            <div className="grid gap-6 sm:gap-8 md:grid-cols-2 md:items-start">
               <div>
-               <h2 className="text-3xl font-extrabold text-slate-900">
+               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
   Get a Quote
 </h2>
-<p className="mt-3 text-slate-600">
+<p className="mt-3 text-sm sm:text-base text-slate-700">
   Tell us delivery vs live entertainment, date/time, suburb, and any theme requests — we’ll reply with availability and a quote.
 </p>
 
                 <div className="mt-5 rounded-2xl bg-white/80 p-4 ring-1 ring-slate-200">
                   {/* <div className="text-sm font-semibold text-slate-800">Quick notes</div> */}
-                  <ul className="mt-2 list-disc pl-5 text-sm text-slate-600">
+                  <ul className="mt-2 list-disc pl-5 text-xs sm:text-sm text-slate-700">
 <li>
   📞{" "}
   <a
@@ -355,7 +355,7 @@ export default function Home() {
   ✉️{" "}
   <a
     href="mailto:qianhaopower@gmail.com"
-    className="hover:underline"
+    className="font-semibold text-slate-900 hover:underline"
   >
     qianhaopower@gmail.com
   </a>
