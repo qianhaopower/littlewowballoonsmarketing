@@ -96,7 +96,7 @@ export default function Home() {
         </div>
 
         <h1 className="mt-8 max-w-2xl text-5xl font-black tracking-tighter text-slate-900 leading-[1.1] md:text-6xl">
-          Unforgettable Balloon 
+          Unforgettable Balloons 
           <span className="bg-gradient-to-r from-brand-orange via-brand-pink to-brand-yellow bg-clip-text text-transparent">Magic</span>
         </h1>
 
@@ -112,20 +112,6 @@ export default function Home() {
           <a href="#services" className="inline-flex items-center gap-2 rounded-full border-2 border-brand-blue/30 bg-white px-8 py-4 font-semibold text-brand-blue transition hover:border-brand-blue/60 hover:bg-brand-blue/5">
             Explore Services
           </a>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {[
-            { k: "30+", v: "Designs" },
-            { k: "1000+", v: "Happy Guests" },
-            { k: "5★", v: "Rated" },
-          ].map((item) => (
-            <div key={item.k} className="">
-              <div className="text-3xl font-black bg-gradient-to-r from-brand-orange to-brand-pink bg-clip-text text-transparent">{item.k}</div>
-              <div className="mt-1 text-sm font-semibold text-slate-600">{item.v}</div>
-            </div>
-          ))}
         </div>
       </div>
 
