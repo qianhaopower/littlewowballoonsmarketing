@@ -229,10 +229,10 @@ export default function Home() {
   >
     {p.highlight && <div className="pointer-events-none absolute top-0 right-0 h-32 w-32 bg-white/10 rounded-full blur-2xl" />}
     <div className="relative z-10">
-      <div className={p.highlight ? "text-white/90 font-semibold text-xs sm:text-sm" : "text-slate-600 font-semibold text-xs sm:text-sm"}>{p.count}</div>
+      <div className={p.highlight ? "text-white/90 font-semibold text-xs sm:text-sm" : "text-slate-700 font-semibold text-xs sm:text-sm"}>{p.count}</div>
       <div className={`mt-2 text-3xl sm:text-4xl font-black ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.price}</div>
-      <div className="mt-1 text-base sm:text-lg font-bold">{p.title}</div>
-      <div className={`mt-3 text-xs sm:text-sm leading-relaxed ${p.highlight ? "text-white/80" : "text-slate-600"}`}>{p.note}</div>
+      <div className={`mt-1 text-base sm:text-lg font-bold ${p.highlight ? "text-white" : "text-slate-900"}`}>{p.title}</div>
+      <div className={`mt-3 text-xs sm:text-sm leading-relaxed ${p.highlight ? "text-white/90" : "text-slate-700"}`}>{p.note}</div>
     </div>
   </div>
 ))}
