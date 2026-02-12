@@ -72,6 +72,9 @@ const galleryImages = [
   "/gallery/gallery-12.png",
   "/gallery/gallery-13.png",
   "/gallery/gallery-14.png",
+  "/gallery/gallery-15.png",
+  "/gallery/gallery-16.png",
+  "/gallery/gallery-17.png",
 ];
 
 export default function Home() {
@@ -241,7 +244,7 @@ export default function Home() {
         <section id="gallery" className="scroll-mt-40 mx-auto max-w-6xl px-4 py-16 sm:py-20">
           <div className="mb-12 sm:mb-16 text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900">Our Creations</h2>
-            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Explore 14+ stunning balloon designs in action</p>
+            <p className="mt-3 sm:mt-4 text-base sm:text-xl text-slate-700">Explore 17+ stunning balloon designs in action</p>
           </div>
 
           <GalleryLightbox images={galleryImages} />
