@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     "Little Wow Balloons provides fun, safe balloon entertainment for kids parties, festivals, corporate events, schools, and aged care across Melbourne.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/little-wow-balloons-transparent.png",
   },
 };
 
