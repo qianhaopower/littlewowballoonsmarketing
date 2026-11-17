@@ -1,3 +1,5 @@
+const currentYear = new Date().getUTCFullYear();
+
 export function Footer() {
   return (
     <footer className="border-t border-slate-100 bg-white">
@@ -16,7 +18,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-6 text-xs text-slate-500">
-          © {new Date().getFullYear()} Little Wow Balloons. 
+          © {currentYear} Little Wow Balloons.
         </div>
       </div>
     </footer>

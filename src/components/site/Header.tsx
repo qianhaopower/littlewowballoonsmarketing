@@ -12,16 +12,8 @@ const nav = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50">
-      <div
-        className="relative border-b border-white/20"
-        style={{
-          backgroundImage: "url('/header-bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* overlay for readability */}
-        <div className="absolute inset-0 bg-white/75 backdrop-blur-sm" />
+      <div className="relative border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,138,61,0.16),transparent_24%),radial-gradient(circle_at_right,rgba(74,124,255,0.16),transparent_24%)]" />
 
         {/* header content */}
         <div className="relative">
@@ -43,7 +35,7 @@ export function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-[17px] font-semibold tracking-wide text-slate-800 transition hover:text-brand-orange"
+                  className="text-[17px] font-semibold tracking-wide text-white/80 transition hover:text-brand-yellow"
                 >
                   {item.label}
                 </a>
@@ -53,7 +45,7 @@ export function Header() {
             {/* CTA */}
         <a
   href="#quote"
-  className="inline-flex items-center rounded-full bg-yellow-400 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-extrabold text-slate-900 shadow-lg transition hover:bg-yellow-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400/60"
+  className="inline-flex items-center rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-950 shadow-lg transition hover:-translate-y-0.5 hover:bg-brand-yellow sm:px-5 sm:py-2.5 sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow/60"
 >
   Get a quote
 </a>
@@ -62,7 +54,7 @@ export function Header() {
           </div>
 
           {/* subtle bottom accent line */}
-          <div className="h-px bg-gradient-to-r from-transparent via-brand-orange/40 to-transparent" />
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
         </div>
       </div>
     </header>

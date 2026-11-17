@@ -1,8 +1,6 @@
-'use client';
-
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import Image from "next/image";
+import { Hero } from "@/components/site/Hero";
 import { QuoteForm } from "@/components/site/QuoteForm";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { GalleryLightbox } from "@/components/site/GalleryLightbox";
@@ -83,72 +81,7 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* HERO */}
-       <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white">
-  {/* Decorative blobs */}
-  <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-brand-pink/8 blur-3xl" />
-  <div className="pointer-events-none absolute right-0 top-20 h-96 w-96 rounded-full bg-brand-blue/8 blur-3xl" />
-  <div className="pointer-events-none absolute left-1/3 top-40 h-80 w-80 rounded-full bg-brand-yellow/8 blur-3xl" />
-
- <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-12 md:pt-20 md:pb-16">
-    <div className="grid items-center gap-12 md:grid-cols-2">
-      {/* LEFT */}
-      <div>
-        <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-3 text-sm font-bold text-slate-900 ring-1 ring-slate-200 backdrop-blur-sm">
-          <span>🎈</span> Melbourne's Balloon Experts
-        </div>
-
-        <h1 className="mt-8 max-w-2xl text-4xl font-black tracking-tighter text-slate-900 leading-[1.1] sm:text-5xl md:text-6xl">
-          Unforgettable Balloons 
-          <span className="bg-gradient-to-r from-brand-orange via-brand-pink to-brand-yellow bg-clip-text text-transparent">Magic</span>
-        </h1>
-
-        <p className="mt-6 max-w-lg text-base sm:text-lg leading-relaxed text-slate-700">
-          30+ custom balloon designs, live entertainment, and bulk orders for kids' parties, corporate events, festivals, schools, and beyond.
-        </p>
-
-      </div>
-
-      {/* RIGHT: Hero Images */}
-      <div className="relative">
-        <div className="rounded-3xl bg-white p-2 shadow-2xl ring-1 ring-slate-100 overflow-hidden">
-          <div className="grid grid-cols-2 gap-3">
-            {/* Big hero image */}
-            <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-slate-100">
-             <Image
-  src="/hero/hero-1-v2.png"
-  alt="Little Wow Balloons balloon creation"
-  fill
-  className="object-contain"
-  priority
-/>
-            </div>
-
-            {/* hero-2 */}
-<div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-100">
-  <Image
-    src="/hero/hero-2.png"
-    alt="Balloon twisting at a kids party"
-    fill
-    className="object-cover object-center transition-transform duration-300 hover:scale-110"
-  />
-</div>
-
-{/* hero-3 */}
-<div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-100">
-  <Image
-    src="/hero/hero-3-v2.png"
-    alt="Festival balloon creations"
-    fill
-    className="object-cover object-center transition-transform duration-300 hover:scale-110"
-  />
-</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <Hero />
 
 
         {/* SERVICES */}
