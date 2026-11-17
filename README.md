@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Little Wow
 
-## Getting Started
+A personal showcase of balloon sculptures, presented like a jewellery exhibition: a dark ground, one piece per plinth, and no colour on the page except the balloons.
 
-First, run the development server:
+Built with Next.js (App Router). Every page is static.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| The collection (names, notes, order) | `src/content/pieces.ts` |
+| Piece photographs (transparent WebP) | `public/pieces/` |
+| Making-of films | `public/films/` (create when the first film arrives) |
+| Original photos, before cutting out | `assets/originals/` (not served) |
+| Look and feel | `src/app/globals.css` |
+| Home page / piece page | `src/app/page.tsx`, `src/app/pieces/[slug]/page.tsx` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The order of entries in `pieces.ts` is the catalogue order. The first entry is No. 01 and is the piece shown at the entrance.
 
-## Learn More
+## Add a piece
 
-To learn more about Next.js, take a look at the following resources:
+1. Put the photo in `assets/originals/`.
+2. Add a line for it to `PIECES` in `scripts/cutout.py`, then run:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   pip install numpy scipy pillow
+   python scripts/cutout.py my-new-piece
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   This writes `public/pieces/my-new-piece.webp` and prints its width and height.
+3. Add an entry to `src/content/pieces.ts` with that width and height.
 
-## Deploy on Vercel
+The cutout script expects a photo on plain white paper. White balloons on white paper cannot be separated. For new photos, a black backdrop with one light from the side works best; those can be cut out by hand or used directly.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Add a making-of film
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Export the film as MP4 (H.264, 1080p or 720p) and put it in `public/films/`, with an optional poster image.
+2. On the piece in `src/content/pieces.ts`, set:
+
+   ```ts
+   film: { src: "/films/dog.mp4", poster: "/films/dog.jpg" },
+   steps: ["Inflate, leaving a hand's width at the tail.", "Twist the nose…"],
+   ```
+
+The piece page then shows a "The Making" section with the film and numbered steps, and the label's "Film" row links to it. `balloons`, `time` and `level` are also optional and appear on the label once filled in.
+
+## Deploy
+
+Hosted on AWS Amplify (`amplify.yml`). Work lands on `develop`; merging `develop` into `main` publishes the site.
