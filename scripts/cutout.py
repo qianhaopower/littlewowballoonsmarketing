@@ -1,8 +1,8 @@
 """Cut balloon photos off a white studio background, ready for the dark site.
 
 Reads the originals in assets/originals and writes transparent WebP cutouts to
-public/pieces. Photos shot on white paper only; white balloons on white paper
-cannot be separated and need a darker backdrop.
+public/pieces. For photos shot on white paper. Anything else (a wall, a room,
+white balloons on white paper) goes through scripts/lift.py instead.
 
     pip install numpy scipy pillow
     python scripts/cutout.py            # every piece
@@ -91,19 +91,7 @@ def cutout(path, **overrides):
         sizes = ndi.sum(subject, parts, np.arange(1, count + 1))
         subject = np.isin(parts, 1 + np.flatnonzero(sizes >= 500))
 
-    # Soft edge, pulled in by a pixel so no white fringe survives.
-    depth = ndi.distance_transform_edt(subject)
-    alpha = np.clip((depth - 1.0) / 1.3, 0, 1)
-
-    # Paint the fringe with clean colour from just inside the edge.
-    core = depth >= 4.0
-    dist, nearest = ndi.distance_transform_edt(~core, return_indices=True)
-    fringe = subject & ~core & (dist <= 6)
-    rgb = im.copy()
-    rgb[fringe] = im[nearest[0][fringe], nearest[1][fringe]]
-
-    img = Image.fromarray(np.dstack([rgb.astype(np.uint8), (alpha * 255).astype(np.uint8)]), "RGBA")
-    img = img.crop(img.getbbox())
+    img = finish(im, subject)
 
     if o["fade"]:
         px = np.asarray(img).copy()
@@ -119,15 +107,37 @@ def cutout(path, **overrides):
     return img
 
 
-def main():
-    slugs = sys.argv[1:] or list(PIECES)
+def finish(im, subject, scale=1.0, crop=True):
+    """Turn a photo and its subject mask into a soft-edged RGBA cutout.
+
+    `scale` widens the edge treatment for photos much larger than the 1100px output.
+    """
+    # Soft edge, pulled in by a pixel so no background fringe survives.
+    depth = ndi.distance_transform_edt(subject)
+    alpha = np.clip((depth - 1.0 * scale) / (1.3 * scale), 0, 1)
+
+    # Paint the fringe with clean colour from just inside the edge.
+    core = depth >= 4.0 * scale
+    dist, nearest = ndi.distance_transform_edt(~core, return_indices=True)
+    fringe = subject & ~core & (dist <= 6 * scale)
+    rgb = im.copy()
+    rgb[fringe] = im[nearest[0][fringe], nearest[1][fringe]]
+
+    img = Image.fromarray(np.dstack([rgb.astype(np.uint8), (alpha * 255).astype(np.uint8)]), "RGBA")
+    return img.crop(img.getbbox()) if crop else img
+
+
+def save(img, slug):
     os.makedirs(OUT, exist_ok=True)
-    for slug in slugs:
+    img.thumbnail((1100, 1100), Image.LANCZOS)
+    img.save(os.path.join(OUT, slug + ".webp"), "WEBP", quality=93, method=6, alpha_quality=100)
+    print(f"{slug}: width {img.width}, height {img.height}")
+
+
+def main():
+    for slug in sys.argv[1:] or list(PIECES):
         source, overrides = PIECES[slug]
-        img = cutout(os.path.join(SRC, source), **overrides)
-        img.thumbnail((1100, 1100), Image.LANCZOS)
-        img.save(os.path.join(OUT, slug + ".webp"), "WEBP", quality=93, method=6, alpha_quality=100)
-        print(f"{slug}: width {img.width}, height {img.height}")
+        save(cutout(os.path.join(SRC, source), **overrides), slug)
 
 
 if __name__ == "__main__":
