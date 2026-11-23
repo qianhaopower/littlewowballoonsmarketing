@@ -62,7 +62,11 @@ For new photos, a plain backdrop that is not the colour of the balloons, with on
    steps: ["Inflate, leaving a hand's width at the tail.", "Twist the nose…"],
    ```
 
-The piece page then shows a "The Making" section with the film and numbered steps, and the label's "Film" row links to it. `balloons`, `time` and `level` are also optional and appear on the label once filled in.
+The piece page then shows a "The Making" section with the film and numbered steps, and the label's "Film" row links to it. `balloons` and `time` are also optional and appear on the label once filled in.
+
+## Difficulty
+
+Every piece has a `difficulty` in stars in `src/content/pieces.ts`: 1 is a first twist, 5 is the hardest, halves are allowed, and anything above 5 is shown as off the scale. The stars appear on each tile and piece page, and the collection can be filtered by them. A filtered view has its own address, for example `/?difficulty=1#collection`, so it can be shared.
 
 ## Fonts
 
