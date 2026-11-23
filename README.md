@@ -28,17 +28,28 @@ The order of entries in `pieces.ts` is the catalogue order. The first entry is N
 ## Add a piece
 
 1. Put the photo in `assets/originals/`.
-2. Add a line for it to `PIECES` in `scripts/cutout.py`, then run:
+2. Cut it out. Which script depends on the photo:
 
-   ```bash
-   pip install numpy scipy pillow
-   python scripts/cutout.py my-new-piece
-   ```
+   - **On plain white paper:** add a line to `PIECES` in `scripts/cutout.py`, then
 
-   This writes `public/pieces/my-new-piece.webp` and prints its width and height.
+     ```bash
+     pip install numpy scipy pillow
+     python scripts/cutout.py my-new-piece
+     ```
+
+   - **Anywhere else** (against a wall, held in a hand, white balloons on white paper): add a line to `PIECES` in `scripts/lift.py`, then
+
+     ```bash
+     pip install numpy scipy pillow opencv-python-headless
+     python scripts/lift.py my-new-piece
+     ```
+
+     This one runs on a Mac only. It starts from the system's own subject lifting, then tightens the outline. The options at the top of the script cover what the first pass gets wrong: white parts it dropped, a hand to fade out, a shelf to peel away.
+
+   Either script writes `public/pieces/my-new-piece.webp` and prints its width and height.
 3. Add an entry to `src/content/pieces.ts` with that width and height.
 
-The cutout script expects a photo on plain white paper. White balloons on white paper cannot be separated. For new photos, a black backdrop with one light from the side works best; those can be cut out by hand or used directly.
+For new photos, a plain backdrop that is not the colour of the balloons, with one light from the side, gives the cleanest result.
 
 ## Add a making-of film
 

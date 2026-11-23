@@ -244,6 +244,55 @@ export const pieces: Piece[] = [
       alt: "Spring, the character 春 made from red balloons",
     },
   },
+  {
+    slug: "mario-and-luigi",
+    name: "Mario and Luigi",
+    nameZh: "马里奥兄弟",
+    form: "Figures",
+    palette: {
+      name: "Red, green, blue, gold",
+      swatches: ["#D62A22", "#3FA535", "#4B84D8", "#B8902F"],
+    },
+    note: "Two brothers in caps and overalls, side by side. The moustaches are black bubbles, the gloves are clusters of white ones, and the letters on the caps are drawn on by hand.",
+    image: {
+      src: "/pieces/mario-and-luigi.webp",
+      width: 1100,
+      height: 902,
+      alt: "Mario and Luigi as balloon figures, one in a green cap and one in a red cap",
+    },
+  },
+  {
+    slug: "blossom-staff",
+    name: "Blossom Staff",
+    nameZh: "花杖",
+    form: "Wand",
+    palette: {
+      name: "Tangerine, lime, yellow, pink",
+      swatches: ["#E0452A", "#9DBE2C", "#F0C02A", "#F6A9B8"],
+    },
+    note: "A round tangerine bloom on lime leaves, carried on a stem of yellow and pink twisted together, with a ring of pink bubbles for a guard.",
+    reflect: false,
+    image: {
+      src: "/pieces/blossom-staff.webp",
+      width: 457,
+      height: 1100,
+      alt: "Blossom Staff, a balloon staff with an orange bloom, green leaves and a spiral stem in yellow and pink",
+    },
+  },
+  {
+    slug: "paw-wands",
+    name: "Paw Wands",
+    nameZh: "爪印魔法棒",
+    form: "Wand",
+    palette: { name: "White, lemon, pink", swatches: ["#F1F1F3", "#F3D21E", "#F08FB6"] },
+    note: "A pair of white wands, each ending in a ring with a paw print set inside: one in lemon yellow, one in pink.",
+    image: {
+      src: "/pieces/paw-wands.webp",
+      width: 930,
+      height: 1067,
+      alt: "Paw Wands, two white balloon wands with a yellow and a pink paw print",
+    },
+  },
 ];
 
 export const pieceNumber = (index: number) => String(index + 1).padStart(2, "0");
