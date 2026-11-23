@@ -3,6 +3,7 @@
  * and is the piece shown at the entrance.
  *
  * To add a piece: put its image in /public/pieces and add an entry below.
+ * After adding or changing a Chinese name, run scripts/fonts.py (see the README).
  * To add a making-of film: put the file in /public/films and set `film`.
  * Optional fields (film, steps, balloons, time, level) only show once filled.
  */
