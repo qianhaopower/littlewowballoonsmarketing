@@ -1,27 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost, Noto_Serif_SC } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const serif = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+// The fonts are kept in src/fonts (built by scripts/fonts.py), so a build never has to fetch them.
+const serif = localFont({
+  src: [
+    { path: "../fonts/cormorant-garamond.woff2", weight: "300 500", style: "normal" },
+    { path: "../fonts/cormorant-garamond-italic.woff2", weight: "300 500", style: "italic" },
+  ],
   variable: "--font-serif",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
 });
 
-const sans = Jost({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const sans = localFont({
+  src: [{ path: "../fonts/jost.woff2", weight: "300 500", style: "normal" }],
   variable: "--font-sans",
   display: "swap",
+  adjustFontFallback: "Arial",
 });
 
-const cjk = Noto_Serif_SC({
-  weight: ["400"],
+// Carries only the Chinese characters the site uses; other characters fall back to the device's own font.
+const cjk = localFont({
+  src: [{ path: "../fonts/noto-serif-sc.woff2", weight: "400", style: "normal" }],
   variable: "--font-cjk",
   display: "swap",
   preload: false,
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {

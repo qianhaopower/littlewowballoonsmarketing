@@ -48,6 +48,7 @@ The order of entries in `pieces.ts` is the catalogue order. The first entry is N
 
    Either script writes `public/pieces/my-new-piece.webp` and prints its width and height.
 3. Add an entry to `src/content/pieces.ts` with that width and height.
+4. If the entry has a Chinese name (`nameZh`), run `python scripts/fonts.py` (see Fonts below).
 
 For new photos, a plain backdrop that is not the colour of the balloons, with one light from the side, gives the cleanest result.
 
@@ -62,6 +63,17 @@ For new photos, a plain backdrop that is not the colour of the balloons, with on
    ```
 
 The piece page then shows a "The Making" section with the film and numbered steps, and the label's "Film" row links to it. `balloons`, `time` and `level` are also optional and appear on the label once filled in.
+
+## Fonts
+
+Cormorant Garamond, Jost and Noto Serif SC live in `src/fonts`, so a build never has to download anything. (They used to come from Google Fonts at build time, and a failed fetch there failed the deploy.)
+
+```bash
+pip install fonttools brotli
+python scripts/fonts.py
+```
+
+rebuilds them from the upstream files. Run it after adding or changing a Chinese name: the Chinese font carries only the characters the site uses, and a character it lacks is drawn in whatever font the visitor's device has.
 
 ## Deploy
 
