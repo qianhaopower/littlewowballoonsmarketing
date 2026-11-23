@@ -5,7 +5,7 @@
  * To add a piece: put its image in /public/pieces and add an entry below.
  * After adding or changing a Chinese name, run scripts/fonts.py (see the README).
  * To add a making-of film: put the file in /public/films and set `film`.
- * Optional fields (film, steps, balloons, time, level) only show once filled.
+ * Optional fields (film, steps, balloons, time) only show once filled.
  */
 
 export type Piece = {
@@ -14,6 +14,11 @@ export type Piece = {
   /** Small secondary name shown beside the title. */
   nameZh?: string;
   form: string;
+  /**
+   * How hard the piece is to make, in stars: 1 is a first twist, 5 is the hardest.
+   * Halves are allowed. Anything above 5 is shown as off the scale.
+   */
+  difficulty: number;
   palette: { name: string; swatches: string[] };
   /** One or two sentences describing what is in the photograph. */
   note: string;
@@ -24,7 +29,6 @@ export type Piece = {
   steps?: string[];
   balloons?: string;
   time?: string;
-  level?: string;
 };
 
 export const pieces: Piece[] = [
@@ -33,6 +37,7 @@ export const pieces: Piece[] = [
     name: "The Dog",
     nameZh: "小狗",
     form: "Animal",
+    difficulty: 1,
     palette: { name: "Rose pink, lemon", swatches: ["#F99FBC", "#F5D83B"] },
     note: "The one everybody knows: four legs, two ears and a tail in soft pink, finished with a yellow collar.",
     image: {
@@ -47,6 +52,7 @@ export const pieces: Piece[] = [
     name: "The Bear",
     nameZh: "小熊",
     form: "Animal",
+    difficulty: 1.5,
     palette: { name: "Rose pink", swatches: ["#FB9CB7"] },
     note: "A seated bear in soft pink, round ears up and paws tucked in.",
     image: {
@@ -61,6 +67,7 @@ export const pieces: Piece[] = [
     name: "The Sword",
     nameZh: "宝剑",
     form: "Prop",
+    difficulty: 1,
     palette: { name: "Lemon yellow", swatches: ["#F7D808"] },
     note: "A long yellow blade with a looped guard and a beaded grip.",
     image: {
@@ -75,6 +82,7 @@ export const pieces: Piece[] = [
     name: "Four-Petal Flower",
     nameZh: "四瓣花",
     form: "Flower",
+    difficulty: 3,
     palette: {
       name: "Blue, red, orange, pink, green",
       swatches: ["#1877E0", "#E53C2E", "#F47B20", "#F896A4", "#84C132"],
@@ -92,6 +100,7 @@ export const pieces: Piece[] = [
     name: "The Dinosaur",
     nameZh: "恐龙",
     form: "Animal",
+    difficulty: 1,
     palette: { name: "Emerald, moss", swatches: ["#1C780B", "#579F10"] },
     note: "A long neck, a ridged back and four sturdy legs, all in deep green.",
     image: {
@@ -106,6 +115,7 @@ export const pieces: Piece[] = [
     name: "The Fish",
     nameZh: "小鱼",
     form: "Animal",
+    difficulty: 4,
     palette: { name: "Sapphire, lemon, sky", swatches: ["#067EDA", "#F4D21F", "#7CC4EA"] },
     note: "A blue reef fish with sweeping fins and a bright yellow eye.",
     image: {
@@ -120,6 +130,7 @@ export const pieces: Piece[] = [
     name: "The Rose",
     nameZh: "玫瑰",
     form: "Flower",
+    difficulty: 2,
     palette: { name: "Red, leaf green", swatches: ["#F90902", "#42A20B"] },
     note: "A red rosebud, tightly folded, with two green leaves on a long stem.",
     image: {
@@ -134,6 +145,7 @@ export const pieces: Piece[] = [
     name: "Rainbow Lollipop",
     nameZh: "彩虹棒棒糖",
     form: "Sweet",
+    difficulty: 3,
     palette: { name: "Peach, lemon, sky blue", swatches: ["#F3C9B5", "#FBDA0C", "#AAD2DF"] },
     note: "Rings of sky blue, yellow and peach, coiled into a lollipop on a pale blue stick.",
     image: {
@@ -148,6 +160,7 @@ export const pieces: Piece[] = [
     name: "The Sceptre",
     nameZh: "权杖",
     form: "Wand",
+    difficulty: 3,
     palette: { name: "Violet, peach, lime", swatches: ["#8C74F3", "#FFBE8D", "#BACB46"] },
     note: "A violet orb set in a collar of peach and lime, raised on a long peach handle.",
     image: {
@@ -162,6 +175,7 @@ export const pieces: Piece[] = [
     name: "Bow Wand",
     nameZh: "蝴蝶结魔法棒",
     form: "Wand",
+    difficulty: 3,
     palette: { name: "Blush pink, sky blue", swatches: ["#FAC1D5", "#8AD4F2"] },
     note: "A pale pink orb tied with a sky-blue bow, on a slender blue wand.",
     image: {
@@ -176,6 +190,7 @@ export const pieces: Piece[] = [
     name: "Wrist Corsage",
     nameZh: "手腕花",
     form: "Wearable",
+    difficulty: 2,
     palette: { name: "Red, yellow, pink", swatches: ["#F70104", "#F4C21C", "#F59BB5"] },
     note: "A red flower with a yellow centre, worn at the wrist on a pink band.",
     reflect: false,
@@ -191,6 +206,7 @@ export const pieces: Piece[] = [
     name: "The Octopus",
     nameZh: "章鱼",
     form: "Animal",
+    difficulty: 2,
     palette: {
       name: "Blush, blue, orange, yellow",
       swatches: ["#F7D0D9", "#039CEA", "#F47B20", "#F1C232"],
@@ -208,6 +224,7 @@ export const pieces: Piece[] = [
     name: "Sphere in a Cube",
     nameZh: "笼中球",
     form: "Structure",
+    difficulty: 5,
     palette: { name: "Lemon yellow, turquoise", swatches: ["#FEE90B", "#1E9FB4"] },
     note: "A turquoise sphere held inside a cube of twelve yellow edges.",
     image: {
@@ -222,6 +239,7 @@ export const pieces: Piece[] = [
     name: "The Lantern",
     nameZh: "灯笼",
     form: "Festival piece",
+    difficulty: 5,
     palette: { name: "Deep red, gold", swatches: ["#C30417", "#F2B705"] },
     note: "A round lantern in deep red, ribbed like a cut stone and finished with gold at the crown and the tassel.",
     image: {
@@ -236,6 +254,7 @@ export const pieces: Piece[] = [
     name: "Spring",
     nameZh: "春",
     form: "Character",
+    difficulty: 5,
     palette: { name: "Red, yellow", swatches: ["#CF010C", "#F2C21B"] },
     note: "The character 春, spring, written in red balloons with a small yellow flower set inside.",
     image: {
@@ -250,6 +269,7 @@ export const pieces: Piece[] = [
     name: "Mario and Luigi",
     nameZh: "马里奥兄弟",
     form: "Figures",
+    difficulty: 100,
     palette: {
       name: "Red, green, blue, gold",
       swatches: ["#D62A22", "#3FA535", "#4B84D8", "#B8902F"],
@@ -267,6 +287,7 @@ export const pieces: Piece[] = [
     name: "Blossom Staff",
     nameZh: "花杖",
     form: "Wand",
+    difficulty: 5,
     palette: {
       name: "Tangerine, lime, yellow, pink",
       swatches: ["#E0452A", "#9DBE2C", "#F0C02A", "#F6A9B8"],
@@ -285,6 +306,7 @@ export const pieces: Piece[] = [
     name: "Paw Wands",
     nameZh: "爪印魔法棒",
     form: "Wand",
+    difficulty: 3,
     palette: { name: "White, lemon, pink", swatches: ["#F1F1F3", "#F3D21E", "#F08FB6"] },
     note: "A pair of white wands, each ending in a ring with a paw print set inside: one in lemon yellow, one in pink.",
     image: {
@@ -295,6 +317,13 @@ export const pieces: Piece[] = [
     },
   },
 ];
+
+const DIFFICULTY_NAMES = ["Beginner", "Easy", "Intermediate", "Advanced", "Expert", "Off the scale"];
+
+/** The star band a piece falls in: 1 to 5, or 6 for anything off the scale. A bear at 1.5 sits in band 1. */
+export const difficultyBand = (difficulty: number) => (difficulty > 5 ? 6 : Math.max(1, Math.floor(difficulty)));
+
+export const difficultyName = (difficulty: number) => DIFFICULTY_NAMES[difficultyBand(difficulty) - 1];
 
 export const pieceNumber = (index: number) => String(index + 1).padStart(2, "0");
 

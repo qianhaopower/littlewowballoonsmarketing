@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Figure } from "@/components/Figure";
-import { PieceTile } from "@/components/PieceTile";
+import { Collection } from "@/components/Collection";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { countInWords, pieceNumber, pieces } from "@/content/pieces";
 
@@ -63,18 +63,10 @@ export default function Home() {
               <span className="eyebrow">The Collection</span>
               <h2 className="section-title">{countWord} pieces</h2>
             </div>
-            <p>Choose a piece to see it up close. Films of the making will join the collection one at a time.</p>
+            <p>Choose a piece to see it up close. The stars beside each number say how hard it is to make.</p>
           </div>
 
-          <div className="grid">
-            {pieces.map((piece, index) => (
-              <PieceTile key={piece.slug} piece={piece} index={index} />
-            ))}
-            {Array.from({ length: (3 - (count % 3)) % 3 }, (_, i) => (
-              <div key={`three-${i}`} className="tile tile--blank tile--blank-3" aria-hidden="true" />
-            ))}
-            {count % 2 === 1 && <div className="tile tile--blank tile--blank-2" aria-hidden="true" />}
-          </div>
+          <Collection />
         </section>
 
         <section id="about" className="wrap">

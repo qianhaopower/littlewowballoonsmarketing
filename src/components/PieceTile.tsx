@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Figure } from "@/components/Figure";
+import { Stars } from "@/components/Stars";
 import { pieceNumber, type Piece } from "@/content/pieces";
 
 export function PieceTile({ piece, index }: { piece: Piece; index: number }) {
@@ -12,7 +13,10 @@ export function PieceTile({ piece, index }: { piece: Piece; index: number }) {
       </div>
       <div className="tile__caption">
         <div className="tile__id">
-          <span className="no">No. {pieceNumber(index)}</span>
+          <span className="tile__meta">
+            <span className="no">No. {pieceNumber(index)}</span>
+            <Stars value={piece.difficulty} />
+          </span>
           <span className="tile__name">{piece.name}</span>
         </div>
         {piece.nameZh && (

@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { KeyNav } from "@/components/KeyNav";
 import { PieceStage } from "@/components/PieceStage";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import { findPiece, pieceNumber, pieces } from "@/content/pieces";
+import { Stars } from "@/components/Stars";
+import { difficultyName, findPiece, pieceNumber, pieces } from "@/content/pieces";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -71,6 +72,13 @@ export default async function PiecePage({ params }: Props) {
                 <dd>{piece.form}</dd>
               </div>
               <div className="spec__row">
+                <dt>Difficulty</dt>
+                <dd>
+                  <Stars value={piece.difficulty} />
+                  {difficultyName(piece.difficulty)}
+                </dd>
+              </div>
+              <div className="spec__row">
                 <dt>Palette</dt>
                 <dd>
                   <span className="swatches" aria-hidden="true">
@@ -95,12 +103,6 @@ export default async function PiecePage({ params }: Props) {
                 <div className="spec__row">
                   <dt>Time</dt>
                   <dd>{piece.time}</dd>
-                </div>
-              )}
-              {piece.level && (
-                <div className="spec__row">
-                  <dt>Level</dt>
-                  <dd>{piece.level}</dd>
                 </div>
               )}
               <div className="spec__row">
