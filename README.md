@@ -23,7 +23,7 @@ npm run build    # production build
 | Look and feel | `src/app/globals.css` |
 | Home page / piece page | `src/app/page.tsx`, `src/app/pieces/[slug]/page.tsx` |
 
-The order of entries in `pieces.ts` is the catalogue order. The first entry is No. 01 and is the piece shown at the entrance.
+The order of entries in `pieces.ts` is the catalogue order; the first entry is No. 01. The piece shown at the entrance is set by `FLAGSHIP` in the same file.
 
 ## Add a piece
 

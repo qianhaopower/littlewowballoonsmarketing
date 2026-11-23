@@ -1,6 +1,6 @@
 /**
- * The collection. Order here is the catalogue order: the first entry is No. 01
- * and is the piece shown at the entrance.
+ * The collection. Order here is the catalogue order: the first entry is No. 01.
+ * The piece shown at the entrance is named by FLAGSHIP, below the list.
  *
  * To add a piece: put its image in /public/pieces and add an entry below.
  * After adding or changing a Chinese name, run scripts/fonts.py (see the README).
@@ -317,6 +317,14 @@ export const pieces: Piece[] = [
     },
   },
 ];
+
+/** The piece shown at the entrance: the first thing a visitor sees. */
+const FLAGSHIP = "mario-and-luigi";
+
+export const flagshipIndex = Math.max(
+  0,
+  pieces.findIndex((piece) => piece.slug === FLAGSHIP),
+);
 
 const DIFFICULTY_NAMES = ["Beginner", "Easy", "Intermediate", "Advanced", "Expert", "Off the scale"];
 

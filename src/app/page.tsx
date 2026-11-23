@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Figure } from "@/components/Figure";
 import { Collection } from "@/components/Collection";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import { countInWords, pieceNumber, pieces } from "@/content/pieces";
+import { Stars } from "@/components/Stars";
+import { countInWords, flagshipIndex, pieceNumber, pieces } from "@/content/pieces";
 
 export default function Home() {
-  const featured = pieces[0];
+  const featured = pieces[flagshipIndex];
   const count = pieces.length;
   const countWord = countInWords(count);
 
@@ -32,13 +33,18 @@ export default function Home() {
               </a>
             </div>
 
-            <Link href={`/pieces/${featured.slug}`} className="stage stage--hero" aria-label={`${featured.name}, No. 01`}>
+            <Link
+              href={`/pieces/${featured.slug}`}
+              className="stage stage--hero"
+              aria-label={`${featured.name}, No. ${pieceNumber(flagshipIndex)}`}
+            >
               <div className="stage__floor" aria-hidden="true" />
               <div className="stage__box">
                 <Figure piece={featured} priority />
               </div>
               <div className="stage__caption">
-                <span className="no">No. {pieceNumber(0)}</span>
+                <span className="no">No. {pieceNumber(flagshipIndex)}</span>
+                <Stars value={featured.difficulty} />
                 <span className="stage__name">{featured.name}</span>
                 {featured.nameZh && (
                   <span className="zh" lang="zh-Hans">
